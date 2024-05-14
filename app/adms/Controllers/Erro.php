@@ -3,10 +3,10 @@
 namespace App\adms\Controllers;
 
 /**
- * Controller da página login
+ * Controller da página erro
  * @author Cesar <cesar@celke.com.br>
  */
-class Login
+class Erro
 {
 
     /** @var array|string|null $data Recebe os dados que devem ser enviados para VIEW */
@@ -17,13 +17,13 @@ class Login
      * 
      * @return void
      */
-    public function index(): void
+    public function index():void
     {
-        echo "Pagina de login<br>";
+        echo "Pagina de erro<br>";
 
-        $this->data = null;
+        $this->data = "<p style='color: #f00;'>Página não encontrada!</p>";
 
-        $loadView = new \Core\ConfigView("adms/Views/login/login", $this->data);
+        $loadView = new \Core\ConfigView("adms/Views/erro/erro", $this->data);
         $loadView->loadView();
     }
 }
