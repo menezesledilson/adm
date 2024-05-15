@@ -42,10 +42,10 @@ class ConfigController extends Config
         $this->configAdm();
         if (!empty(filter_input(INPUT_GET, 'url', FILTER_DEFAULT))) {
             $this->url = filter_input(INPUT_GET, 'url', FILTER_DEFAULT);
-            var_dump($this->url);
+            //var_dump($this->url);
             $this->clearUrl();
             $this->urlArray = explode("/", $this->url);
-            var_dump($this->urlArray);
+            //var_dump($this->urlArray);
 
             if (isset($this->urlArray[0])) {
                 $this->urlController = $this->slugController($this->urlArray[0]);
@@ -69,9 +69,9 @@ class ConfigController extends Config
             $this->urlMetodo = $this->slugMetodo(METODO);
             $this->urlParameter = "";
         }
-        echo "Controller: {$this->urlController} <br>";
-        echo "Metodo: {$this->urlMetodo} <br>";
-        echo "Paramentro: {$this->urlParameter} <br>";
+        //echo "Controller: {$this->urlController} <br>";
+        //echo "Metodo: {$this->urlMetodo} <br>";
+        //echo "Paramentro: {$this->urlParameter} <br>";
     }
 
     /**
@@ -90,7 +90,7 @@ class ConfigController extends Config
         $this->url = rtrim($this->url, "/");
         $this->format['a'] = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜüÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿRr"!@#$%&*()_-+={[}]?;:.,\\\'<>°ºª ';
         $this->format['b'] = 'aaaaaaaceeeeiiiidnoooooouuuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr-------------------------------------------------------------------------------------------------';
-        $this->url = strtr(mb_convert_encoding($this->url, 'ISO-8859-1', 'UTF-8'), $this->format['a'], $this->format['b']);
+        $this->url = strtr(utf8_decode($this->url), utf8_decode($this->format['a']), $this->format['b']);
     }
 
     /**
@@ -111,7 +111,7 @@ class ConfigController extends Config
         $this->urlSlugController = ucwords($this->urlSlugController);
         // Retirar espaco em branco        
         $this->urlSlugController = str_replace(" ", "", $this->urlSlugController);
-        var_dump($this->urlSlugController);
+        //var_dump($this->urlSlugController);
         return $this->urlSlugController;
     }
 
@@ -128,7 +128,7 @@ class ConfigController extends Config
         $this->urlSlugMetodo = $this->slugController($urlSlugMetodo);
         //Converter para minusculo a primeira letra
         $this->urlSlugMetodo = lcfirst($this->urlSlugMetodo);
-        var_dump($this->urlSlugMetodo);
+        //var_dump($this->urlSlugMetodo);
         return $this->urlSlugMetodo;
     }
 
@@ -140,7 +140,7 @@ class ConfigController extends Config
      */
     public function loadPage(): void
     {
-        echo "Carregar Pagina: {$this->urlController}<br>";
+        //echo "Carregar Pagina: {$this->urlController}<br>";
 
         //$this->urlController = ucwords($this->urlController);
         //echo "Carregar Pagina corrigida: {$this->urlController}<br>";
